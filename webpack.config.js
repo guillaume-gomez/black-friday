@@ -13,6 +13,7 @@ const v2Sources = {
     // Add v2 specific sources here
     amazon: './src/amazon.js',
     cdiscount: './src/cdiscount.js',
+    free: './src/free.js',
 }
 
 const v3Sources = {

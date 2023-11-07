@@ -14,6 +14,55 @@ function warningMessageAmazon(title, message, type='warning', customTxt='')// ty
     return warningMessage;
 }
 
+function checkBuy(message){
+    return '' +
+        '<div class="a-box-inner a-padding-base">' +
+        '  <h6 style="color:#ba0010;">' +
+        '    <b>' +
+        '      X ' + message +
+        '    </b>' +
+        '  </h6>' +
+        '</div>' +
+        '';
+}
+
+function onClickBuy(event){
+    const fakeBtn1 = document.getElementById("fakeBuy");
+    const fakeBtn2 = document.getElementById("fakeBuyNow");
+
+    const divControl = document.createElement("div");
+
+    divControl.innerHTML =  '' +
+        '<div class="ac-badge-wrapper">' +
+        '<span class="a-size-small aok-float-left ac-badge-rectangle">' +
+        '  <span class="ac-badge-text-primary ac-white">Amazon </span>' +
+        '  <span class="ac-badge-text-secondary ac-orange">AntiCompulsif</span>' +
+        '</span></div><br />' +
+        '<p>Prenez quelques instants pour répondre à ces questions, puis cliquez sur le bouton pour continuer.</p>' +
+        checkBuy('Est-ce que j\'en ai besoin ?') +
+        checkBuy('Est-ce que j\'en ai vraiment besoin ?') +
+        checkBuy('Est-ce que j\'en ai vraiment besoin maintenant ?')
+    ;
+
+
+    fakeBtn1.remove();
+    fakeBtn2.remove();
+
+    const addToCartButton = document.getElementById("atc-declarative")
+    if(addToCartButton){
+        addToCartButton.parentNode.insertBefore(divControl, addToCartButton.previousSibling);
+
+        addToCartButton.style.visibility = '';
+        addToCartButton.style.position = '';
+    }
+
+    const buyNowButton = document.getElementById("buyNow")
+    if(buyNowButton){
+        buyNowButton.style.visibility = '';
+        buyNowButton.style.position = '';
+    }
+}
+
 
 // console.log("jdkfdjfjdkfjdkfjdkf")
 document.body.style.border = "5px solid red";
@@ -147,7 +196,7 @@ else{
         {
             const preloadLandingPage = document.getElementById("rw-preload-landing-image_div")
             if(preloadLandingPage) {
-                preloadLandingPage.parentNode.insertBefore(warningMessageAmazon('-19% en reconditionné, ça c\'est une véritable offre','Retrouvez l\'iPhone 14 128Go reconditionné à seulement 700€ sur VotreReconditionnée.fr'), preloadLandingPage.nextSibling);
+                preloadLandingPage.parentNode.insertBefore(warningMessageAmazon('-19% en reconditionné, voilà une offre qui vaut le détour !','Retrouvez l\'iPhone 14 128Go reconditionné à seulement 700€ sur VotreReconditionné.fr'), preloadLandingPage.nextSibling);
             }
         }
     }
@@ -161,7 +210,7 @@ else{
         addToCartButton.style.visibility = 'hidden';
         addToCartButton.style.position = 'absolute';
         const fakeBuy = document.createElement("div");
-
+        fakeBuy.id = 'fakeBuy';
         fakeBuy.innerHTML =
             '  <span class="a-declarative" data-action="dp-pre-atc-declarative" id="fakeBtn1">' +
             '    <span class="a-button a-spacing-small a-button-primary a-button-icon natc-enabled">' +
@@ -174,6 +223,10 @@ else{
             '      </span>' +
             '    </span>' +
             '  </span>';
+
+        fakeBuy.addEventListener("click", (event) => {
+            onClickBuy(event);
+        });
 
         addToCartButton.parentNode.insertBefore(fakeBuy, addToCartButton.nextSibling);
 
@@ -200,12 +253,12 @@ else{
             '    </span>\n' +
             '  </span>';
 
+        fakeBuyNow.addEventListener("click", (event) => {
+            onClickBuy(event);
+        });
+
         buyNowButton.parentNode.insertBefore(fakeBuyNow, buyNowButton.nextSibling);
     }
-
-
-
-
 }
 
 

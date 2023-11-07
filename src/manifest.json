@@ -17,8 +17,12 @@
       "js": ["cdiscount.js"]
     },
     {
-      "matches": ["*://*.amazon.fr/*"],
+      "matches": ["https://*.amazon.fr/*"],
       "js": ["amazon.js"]
+    },
+    {
+      "matches": ["https://*.free.fr/*"],
+      "js": ["free.js"]
     }
   ],
   "permissions": [
