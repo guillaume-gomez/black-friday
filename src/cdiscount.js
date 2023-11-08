@@ -62,5 +62,25 @@ function generateBannerMessage() {
     
 }
 
+function subCarouselMessage() {
+    const possibleCarousels = document.getElementsByClassName("c-carousel c-carousel--slideshow js-carousel c-carousel--loaded");
+
+    if(possibleCarousels.length !== 1) {
+       console.error("cannot add a carousel message");
+        return;
+    }
+
+    const text = "super idée de depenser plus pour polluer plus :p ";
+
+    const subCarousel = possibleCarousels[0];
+    const titleDiv = document.createElement("div");
+    titleDiv.style = "font-size: 20px; color: black";
+    titleDiv.innerHTML = `
+        <p>${text}</p>
+    `;
+    subCarousel.appendChild(titleDiv);
+}
+
 generateBannerMessage();
 messageBeforeCheckout();
+subCarouselMessage();
